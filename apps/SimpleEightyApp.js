@@ -1,5 +1,6 @@
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status) {
+		// returns the raw html
 		return html;
 	}
 
@@ -8,7 +9,7 @@ var EightyApp = function() {
 		var $html = app.parseHtml(html);
 		var links = [];
 
-		// gets all links from the featured products section
+		// gets all links in the html document
 		$html.find('a').each(function(i, obj) {
 			var link = app.makeLink(url, $(this).attr('href'));
 			if(link != null) {
