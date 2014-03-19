@@ -1,11 +1,12 @@
 var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status) {
+	this.processDocument = function(html, url, headers, status, jQuery) {
 		return html;
 	}
 
-	this.parseLinks = function(html, url, headers, status) {
+	this.parseLinks = function(html, url, headers, status, jQuery) {
 		var app = this;
-		var $html = app.parseHtml(html);
+		var $ = jQuery;
+		var $html = app.parseHtml(html, $);
 		var links = [];
 
 		// gets all links from the featured products section

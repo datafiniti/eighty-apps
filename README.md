@@ -5,9 +5,10 @@ EightyApps
 
 ```javascript
 var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status) {
+	this.processDocument = function(html, url, headers, status, jQuery) {
 		var app = this;
-		var $html = app.parseHtml(html);
+		$ = jQuery;
+		var $html = app.parseHtml(html, $);
 		var object = new Object();
 
 		// populate the object
@@ -15,9 +16,10 @@ var EightyApp = function() {
 		return JSON.stringify(object);
 	}
 
-	this.parseLinks = function(html, url, headers, status) {
+	this.parseLinks = function(html, url, headers, status, jQuery) {
 		var app = this;
-		var $html = app.parseHtml(html);
+		$ = jQuery;
+		var $html = app.parseHtml(html, $);
 		var links = [];
 
 		// get all the links

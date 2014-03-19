@@ -5,15 +5,18 @@ var EightyAppBase = function() {
 		authStatus = false;
 	};
 
-	this.processDocument = function(html, url, headers, status) {
+	this.processDocument = function(html, url, headers, status, jQuery) {
 	};
 
-	this.parseLinks = function(html, url, headers, status) {
+	this.parseLinks = function(html, url, headers, status, jQuery) {
 	};
 
-	this.parseHtml = function(text) {
-		text = text.replace("<img ", "<img80 ");
-		text = text.replace("</img>", "</img80>");
+	this.parseJSON = function(text){
+		return JSON.parse(text);
+	}
+
+	this.parseHtml = function(text, $) {
+		text = text.replace(/(<img)\+*?/g, "<img80");
 		return $(text);
 	}
 
@@ -30,7 +33,7 @@ var EightyAppBase = function() {
 	this.formatDate = function(date) {
 		// yyyy-MM-ddTHH:mm:ssZ
 		date = new Date(date);
-		return date.getUTCFullYear() + '-' + 
+		return date.getUTCFullYear() + '-' +
 			(date.getUTCMonth()+1<10? '0'+(date.getUTCMonth()+1):''+(date.getUTCMonth()+1)) + '-' +
 			(date.getUTCDate()<10? '0'+date.getUTCDate():''+date.getUTCDate()) + '-' +
 			'T' +
@@ -40,17 +43,34 @@ var EightyAppBase = function() {
 			'Z';
 	}
 
+	this.removeTag = function(text){
+		return text.replace(/<.*?>/g, "");
+	}
+
+	this.getFirstMatch = function(text, regexp){
+		regexp = regexp		
+		var matchedGroup = regexp.exec(text);
+		if (matchedGroup !== null && matchedGroup !== undefined){
+			return matchedGroup[1].trim();
+		}
+	}
+
 	this.makeLink = function(url, link) {
 		// removes links that are #hashes only
-		if(link.indexOf('/') == -1)
+		try {
+			if(link.indexOf('/') == -1)
+				return null;
+		} catch(e) {
+			// indexOf will throw an exception if link is undefined
 			return null;
+		}
 
 		// gets the host from the url
 		var host = url.match(/^http[s]?:\/\/[^/]+/);
 		host = host ? host[0] : null;
 
 		// checks if the link already has a host
-		var linkHost = link.match(/^http[s]?:\/\/[^/]+/)
+		var linkHost = link.match(/^http[s]?:\/\/[^/]+/);
 		if(linkHost == null) {
 			// returns the link with the host added
 			return host + link;
@@ -60,6 +80,22 @@ var EightyAppBase = function() {
 		return link;
 	}
 
+	// eliminateDuplicates code borrowed from: http://dreaminginjavascript.wordpress.com/2008/08/22/eliminating-duplicates/
+	this.eliminateDuplicates = function (arr) {
+		var i;
+		var len=arr.length;
+		var out=[];
+		var obj={};
+
+		for (i=0;i<len;i++) {
+			if (!obj[arr[i]]) {
+				obj[arr[i]]={};
+				out.push(arr[i]);
+			}
+		}
+	  return out;
+	}
+
 	// The following is included to make this testable with node.js
 	try { if(module != null) { var $ = this.$ = ""; } } catch(e) {}
 	this.processTest = function(html, url, headers, status) {
@@ -67,9 +103,9 @@ var EightyAppBase = function() {
 		var env = require('jsdom').env;
 		env(html, function (errors, window) {
 			$ = this.$ = require('jquery')(window);
-			var result = app.processDocument(html, url, headers, status);
+			var result = app.processDocument(html, url, headers, status, $);
 			console.log(result);
-			var links = app.parseLinks(html, url, headers, status);
+			var links = app.parseLinks(html, url, headers, status, $);
 			console.log(links);
 		});
 	}
