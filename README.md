@@ -51,7 +51,7 @@ These commands will install libraries that provide the same functionality that w
 
 You can test using a specific 80app and url with the command:
 ```shell
-$ nodejs 80appTester.js [80app_filename] [url]
+$ nodejs 80AppTester.js [80app_filename] [url]
 ```
 
 (Note: in order for this to work, the base 80app class (EightyApp.js) must be in the same directory)

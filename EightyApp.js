@@ -56,28 +56,26 @@ var EightyAppBase = function() {
 	}
 
 	this.makeLink = function(url, link) {
-		// removes links that are #hashes only
+
 		try {
-			if(link.indexOf('/') == -1)
-				return null;
+			// gets the host from the url
+			var host = url.match(/^http[s]?:\/\/[^/]+/);
+			host = host ? host[0] : null;
+
+			// checks if the link already has a host
+			var linkHost = link.match(/^http[s]?:\/\/[^/]+/);
+			if (linkHost == null) {
+				// returns the link with the host added
+				if (url.substr(url.length - 1) != '/' || link.indexOf(0) != '/') {
+					return host + '/' + link;
+				} else {
+					return host + link;
+				}
+			}
 		} catch(e) {
-			// indexOf will throw an exception if link is undefined
-			return null;
+			// returns the original link
+			return link;
 		}
-
-		// gets the host from the url
-		var host = url.match(/^http[s]?:\/\/[^/]+/);
-		host = host ? host[0] : null;
-
-		// checks if the link already has a host
-		var linkHost = link.match(/^http[s]?:\/\/[^/]+/);
-		if(linkHost == null) {
-			// returns the link with the host added
-			return host + link;
-		}
-
-		// returns the original link
-		return link;
 	}
 
 	// eliminateDuplicates code borrowed from: http://dreaminginjavascript.wordpress.com/2008/08/22/eliminating-duplicates/
