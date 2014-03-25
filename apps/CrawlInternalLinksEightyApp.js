@@ -1,3 +1,9 @@
+/* ************************************************************************
+ * This 80app's parseLinks only returns URLs that have the same domain as *
+ * the current URL being crawled.                                         *
+ **************************************************************************
+ */
+
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 		return null;
