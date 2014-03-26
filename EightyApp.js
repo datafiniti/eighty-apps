@@ -35,7 +35,7 @@ var EightyAppBase = function() {
 		date = new Date(date);
 		return date.getUTCFullYear() + '-' +
 			(date.getUTCMonth()+1<10? '0'+(date.getUTCMonth()+1):''+(date.getUTCMonth()+1)) + '-' +
-			(date.getUTCDate()<10? '0'+date.getUTCDate():''+date.getUTCDate()) + '-' +
+			(date.getUTCDate()<10? '0'+date.getUTCDate():''+date.getUTCDate()) +
 			'T' +
 			(date.getUTCHours()<10? '0'+date.getUTCHours():''+date.getUTCHours()) + ':' +
 			(date.getUTCMinutes()<10? '0'+date.getUTCMinutes():''+date.getUTCMinutes()) + ':' +
@@ -66,7 +66,7 @@ var EightyAppBase = function() {
 			var linkHost = link.match(/^http[s]?:\/\/[^/]+/);
 			if (linkHost == null) {
 				// returns the link with the host added
-				if (url.substr(url.length - 1) != '/' || link.indexOf(0) != '/') {
+				if (link.match(/^\//g)) {
 					return host + '/' + link;
 				} else {
 					return host + link;
