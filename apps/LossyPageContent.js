@@ -1,9 +1,6 @@
 /* ************************************************************************
- * This 80app's parseLinks only returns URLs that have the same domain as *
- * the current URL being crawled.                                         *
- *                                                                        *
- * The processDocument returns a timestamp for when the URL was crawled,  *
- * and a list of words on the page with their frequencies.                *
+ * The processDocument for this 80app returns the HTML with all style,    *
+ * blocks, script blocks, and HTML tags stripped out.                     * 
  **************************************************************************
  */
 
