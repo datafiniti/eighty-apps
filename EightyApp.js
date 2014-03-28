@@ -53,6 +53,18 @@ var EightyAppBase = function() {
         }
     }
 
+    this.append80FlagToLink = function(eightyvalue, link) {
+
+	var returnLink = link;
+	if (link.indexOf("?") >= 0) {
+	    returnLink = link + "&80flag=" + eightyvalue;
+	} else {
+	    returnLink = link + "?80flag=" + eightyvalue;
+	}
+
+	return returnLink;
+    }
+
     this.makeLink = function(url, link) {
 
         try {
