@@ -20,7 +20,7 @@ var EightyAppBase = function() {
 
     this.getPlainText = function(text) {
         text = text
-            .replace(/[^a-z0-9\s.'-:]/gi, '') // remove all characters not a-z, 0-9, and certain punctuation, ignoring case
+        .replace(/[^a-z0-9\s.'-:]/gi, '') // remove all characters not a-z, 0-9, and certain punctuation, ignoring case
         .replace(/\s{2,}/g, ' ') // replace any two whitespace characters next to each other with a single space
         .replace(/\s/g, ' '); // replace all whitespace characters (\t,\n,\r, ) with space
 
@@ -63,6 +63,26 @@ var EightyAppBase = function() {
 	}
 
 	return returnLink;
+    }
+
+    this.get80Value = function(link) {
+
+	//console.log("link:\t" + link);
+	if (link != null) {
+	    var query = link.split("?")[1];
+	    //console.log("query:\t" + query);
+	    var vars = query.split("&");
+	    //console.log("vars:\t" + vars.toString());
+	    for (var i = 0; i < vars.length; i++) {
+	        var pair = vars[i].split("=");
+                if (pair[0] == "80flag") {
+		    //console.log("80flag:\t" + pair[1]);
+		    return pair[1];
+	        }
+	    }
+        }
+
+        return null;
     }
 
     this.makeLink = function(url, link) {
