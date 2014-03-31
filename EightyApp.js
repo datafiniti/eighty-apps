@@ -55,34 +55,33 @@ var EightyAppBase = function() {
 
     this.append80FlagToLink = function(eightyvalue, link) {
 
-	var returnLink = link;
-	if (link.indexOf("?") >= 0) {
-	    returnLink = link + "&80flag=" + eightyvalue;
-	} else {
-	    returnLink = link + "?80flag=" + eightyvalue;
-	}
+    	var returnLink = link;
+    	if (link.indexOf("?") >= 0) {
+    	    returnLink = link + "&80flag=" + eightyvalue;
+    	} else {
+    	    returnLink = link + "?80flag=" + eightyvalue;
+    	}
 
-	return returnLink;
+    	return returnLink;
     }
 
     this.get80Value = function(link) {
 
-	if (link != null) {
-	    var query = link.split("?")[1];
-	    var vars = query.split("&");
-	    for (var i = 0; i < vars.length; i++) {
-	        var pair = vars[i].split("=");
-                if (pair[0] == "80flag") {
-		    return pair[1];
-	        }
-	    }
+    	if (link != null) {
+    	    var query = link.split("?")[1];
+    	    var vars = query.split("&");
+    	    for (var i = 0; i < vars.length; i++) {
+    	        var pair = vars[i].split("=");
+                    if (pair[0] == "80flag") {
+    		    return pair[1];
+    	        }
+    	    }
         }
 
         return null;
     }
 
     this.makeLink = function(url, link) {
-
         try {
             // gets the host from the url
             var host = url.match(/^http[s]?:\/\/[^/]+/);
@@ -97,6 +96,9 @@ var EightyAppBase = function() {
                 } else {
                     return host + '/' + link;
                 }
+            } else {
+                // Return original link.
+                return link;
             }
         } catch (e) {
             // returns the original link
