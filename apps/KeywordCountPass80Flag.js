@@ -3,7 +3,7 @@
  * the current URL being crawled.                                         *
  *                                                                        *
  * The processDocument returns a timestamp for when the URL was crawled,  *
- * and a list of words on the page with their frequencies.                *
+ * a list of words on the page with their frequencies, and the HTML.      *
  **************************************************************************
  */
 
@@ -31,6 +31,9 @@ var EightyApp = function() {
 			}			
 		});
 		object.keywordCount = keywordCount;
+
+		// Get HTML
+		object.html = html;
 
 		return JSON.stringify(object);
 	}
