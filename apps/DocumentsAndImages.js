@@ -42,10 +42,14 @@ var EightyApp = function() {
             object.binary = binary;
             object.source_url = url.replace("?80flag=type:image", "");
 
-        }
-	// Collect document data
-	else {
-	    object.title = $html.filter('title').text();
+        } else {
+
+            var app = this;
+            var $ = jQuery;
+            var $html = app.parseHtml(html, $);
+            var object = {};
+
+            object.title = $html.filter('title').text();
             object.meta_description = $html.filter('meta[name="description"]').attr('content');
             object.meta_keywords= $html.filter('meta[name="keywords"]').attr('content');
             var meta_tags = [];
@@ -66,10 +70,10 @@ var EightyApp = function() {
                  }
             });
             object.links = links;
-	}
+        }
 
         return JSON.stringify(object);
-    };
+    }
 
     this.parseLinks = function(html, url, headers, status, $) {
         var links = [];
@@ -88,9 +92,26 @@ var EightyApp = function() {
                 // Add the 80flag to the image url to let the crawler know to base 64 encode the image.
                 // The 80flag is also the filter used in the processDocument section
                 var link = app.append80FlagToLink("type:image", $(this).attr("src"));
-                links.push(link);
+                links.push(app.makeLink(url, link));
                 links = app.eliminateDuplicates(links);
             });
+
+            var r = /:\/\/(.[^/]+)/;
+            var urlDomain = url.match(r)[1]
+
+            // gets all links in the html document
+            $html.find('a').each(function(i, obj) {
+                // console.log($(this).attr('href'));
+                var link = app.makeLink(url, $(this).attr('href'));
+
+                if(link != null) {
+                    var linkDomain = link.match(r)[1]
+                    if (urlDomain == linkDomain) {
+                        links.push(link);
+                    }
+                }
+            });
+
             return links;
         }
 
@@ -109,3 +130,5 @@ try {
     console.log("Eighty app exists.");
     EightyApp.prototype = new EightyAppBase();
 }
+
+
