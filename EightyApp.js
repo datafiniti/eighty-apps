@@ -20,7 +20,7 @@ var EightyAppBase = function() {
 
     this.getPlainText = function(text) {
         text = text
-        .replace(/[^a-z0-9\s.'-:]/gi, '') // remove all characters not a-z, 0-9, and certain punctuation, ignoring case
+            .replace(/[^a-z0-9\s.'-:]/gi, '') // remove all characters not a-z, 0-9, and certain punctuation, ignoring case
         .replace(/\s{2,}/g, ' ') // replace any two whitespace characters next to each other with a single space
         .replace(/\s/g, ' '); // replace all whitespace characters (\t,\n,\r, ) with space
 
@@ -33,7 +33,7 @@ var EightyAppBase = function() {
         date = new Date(date);
         return date.getUTCFullYear() + '-' +
             (date.getUTCMonth() + 1 < 10 ? '0' + (date.getUTCMonth() + 1) : '' + (date.getUTCMonth() + 1)) + '-' +
-            (date.getUTCDate() < 10 ? '0' + date.getUTCDate() : '' + date.getUTCDate()) +
+            (date.getUTCDate() < 10 ? '0' + date.getUTCDate() : '' + date.getUTCDate()) + '-' +
             'T' +
             (date.getUTCHours() < 10 ? '0' + date.getUTCHours() : '' + date.getUTCHours()) + ':' +
             (date.getUTCMinutes() < 10 ? '0' + date.getUTCMinutes() : '' + date.getUTCMinutes()) + ':' +
@@ -53,35 +53,8 @@ var EightyAppBase = function() {
         }
     }
 
-    this.append80FlagToLink = function(eightyvalue, link) {
-
-    	var returnLink = link;
-    	if (link.indexOf("?") >= 0) {
-    	    returnLink = link + "&80flag=" + eightyvalue;
-    	} else {
-    	    returnLink = link + "?80flag=" + eightyvalue;
-    	}
-
-    	return returnLink;
-    }
-
-    this.get80Value = function(link) {
-
-    	if (link != null) {
-    	    var query = link.split("?")[1];
-    	    var vars = query.split("&");
-    	    for (var i = 0; i < vars.length; i++) {
-    	        var pair = vars[i].split("=");
-                    if (pair[0] == "80flag") {
-    		    return pair[1];
-    	        }
-    	    }
-        }
-
-        return null;
-    }
-
     this.makeLink = function(url, link) {
+
         try {
             // gets the host from the url
             var host = url.match(/^http[s]?:\/\/[^/]+/);
@@ -96,9 +69,6 @@ var EightyAppBase = function() {
                 } else {
                     return host + '/' + link;
                 }
-            } else {
-                // Return original link.
-                return link;
             }
         } catch (e) {
             // returns the original link
@@ -121,27 +91,6 @@ var EightyAppBase = function() {
         }
         return out;
     }
-
-    //$= under $25
-    //$$= $25-$40
-    //$$$= $50-$55
-    //$$$$= above $55
-    //£ = under £15
-    //££ = £15-£25
-    //£££ = £30-£35
-    //££££ = above £35
-
-    //replaces dollar sign notation into dollar amounts to capture price range details
-    this.getPriceRangeReplace = function(text, currency) {
-        if (text != undefined && currency == "USD") {
-            var priceRange = text.replace("$$$$", "Above USD 55.00").replace("$$$", "USD 50.00-55.00").replace("$$", "USD 25.00-40.00").replace("$", "USD 0.00-25.00");
-            return priceRange;
-        } else if (text != undefined && currency == "GBP") {
-            var priceRange = text.replace("££££", "Above GBP 35.00").replace("£££", "GBP 30.00-35.00").replace("££", "GBP 115.00-25.00").replace("£", "GBP 0.00-15.00");
-            return priceRange;
-        }
-
-    };
 
     // The following is included to make this testable with node.js
     try {
