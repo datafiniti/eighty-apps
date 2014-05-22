@@ -63,17 +63,23 @@ var EightyApp = function() {
 
             // gets all links in the html document
             var links = [];
-	    var images = [];
             $html.find('a').each(function(i, obj) {
                  var link = app.makeLink(url, $(this).attr('href'));
                  if(link != null) {
                      links.push(link);
-		     if (link.match(/\.(jpg|png|gif)/g)) {
-			images.push(link);
-		     }
                  }
             });
             object.links = links;
+
+            // 80Legs converts <img> tags into <img80> tags, so find the img80 tags.
+            var images = [];
+            $html.find('img80').each(function(i, obj) {
+                // Add the 80flag to the image url to let the crawler know to base 64 encode the image.
+                // The 80flag is also the filter used in the processDocument section
+                var imagelink = app.append80FlagToLink("type:image", $(this).attr("src"));
+                images.push(app.makeLink(url, imagelink));
+            });
+            images = app.eliminateDuplicates(images);
 	    object.images = images;
 
 	    object.html = html;
@@ -100,8 +106,8 @@ var EightyApp = function() {
                 // The 80flag is also the filter used in the processDocument section
                 var link = app.append80FlagToLink("type:image", $(this).attr("src"));
                 links.push(app.makeLink(url, link));
-                links = app.eliminateDuplicates(links);
             });
+            links = app.eliminateDuplicates(links);
 
             var r = /:\/\/(.[^/]+)/;
             var urlDomain = url.match(r)[1]
