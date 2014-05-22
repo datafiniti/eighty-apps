@@ -109,7 +109,7 @@ var EightyApp = function() {
             // gets all links in the html document
             $html.find('a').each(function(i, obj) {
                 // console.log($(this).attr('href'));
-                var link = app.makeLink(url, $(this).attr('href'));
+                var link = app.makeLink(url, $(this).attr('href').replace("//","/"));
 
                 if(link != null) {
                     var linkDomain = link.match(r)[1]
