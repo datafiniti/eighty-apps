@@ -63,13 +63,20 @@ var EightyApp = function() {
 
             // gets all links in the html document
             var links = [];
+	    var images = [];
             $html.find('a').each(function(i, obj) {
                  var link = app.makeLink(url, $(this).attr('href'));
                  if(link != null) {
                      links.push(link);
+		     if (link.match(/\.(jpg|png|gif)/g)) {
+			images.push(link);
+		     }
                  }
             });
             object.links = links;
+	    object.images = images;
+
+	    object.html = html;
         }
 
         return JSON.stringify(object);
