@@ -63,8 +63,19 @@ var EightyApp = function() {
                 // The 80flag is also the filter used in the processDocument section
                 var link = app.append80FlagToLink("type:image", $(this).attr("src"));
                 links.push(link);
-                links = app.eliminateDuplicates(links);
             });
+
+	    // gets all links in the html document
+            $html.find('a').each(function(i, obj) {
+                var link = app.makeLink(url, $(this).attr('href'));
+
+                if(link != null) {
+                    links.push(link);
+                }
+            });
+
+            links = app.eliminateDuplicates(links);
+
             return links;
         }
 
