@@ -4,7 +4,7 @@ var EightyApp = function() {
 
 	function containsFileExtensions(url) {
 		var extensions = ['.pdf', '.doc', '.ppt', '.xls', '.docx', '.pptx', '.xlsx'];
-		for (i = 0; i < extensions.lenght; i++) {
+		for (i = 0; i < extensions.length; i++) {
 			if (url.match(extensions[i])) {
 				return true;
 			}
