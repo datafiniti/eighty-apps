@@ -2,10 +2,10 @@
 
 var EightyApp = function() {
 
-	this.containsFileExtensions(url) {
+	function containsFileExtensions(url) {
 		var extensions = ['.pdf', '.doc', '.ppt', '.xls', '.docx', '.pptx', '.xlsx'];
 		for (i = 0; i < extensions.lenght; i++) {
-			if (url.match(extensions[i]) {
+			if (url.match(extensions[i])) {
 				return true;
 			}
 		}
@@ -22,8 +22,8 @@ var EightyApp = function() {
                 var links = [];
                 $html.find('a').each(function(i, obj) {
                         var link = app.makeLink(url, $(this).attr('href'));
-			if (containsFileExtensions(link) {
-	                        if(link != null) {
+			if (containsFileExtensions(link)) {
+	                        if (link != null) {
 					links.push(link);
                 	        }
 			}
