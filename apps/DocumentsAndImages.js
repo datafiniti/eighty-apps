@@ -39,6 +39,7 @@ var EightyApp = function() {
             object.byteSize = myBlob.size;
             object.width = image.width;
             object.height = image.height;
+            object.base64 = encodedString;
             object.binary = binary;
             object.source_url = url.replace("?80flag=type:image", "");
 
