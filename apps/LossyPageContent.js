@@ -21,7 +21,7 @@ var EightyApp = function() {
                 lossyHTML = lossyHTML.replace(/<[\s\S]*?>/g,"");
                 object.lossyHTML = lossyHTML;
 
-		return JSON.stringify(object);
+		return app.replaceSpecialCharacters(JSON.stringify(object));
 	}
 
 	this.parseLinks = function(html, url, headers, status, jQuery) {
