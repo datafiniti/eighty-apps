@@ -71,6 +71,7 @@ var EightyApp = function() {
                  }
             });
             object.links = links;
+	    object.numLinks = links.length;
 
             // 80Legs converts <img> tags into <img80> tags, so find the img80 tags.
             var images = [];
@@ -82,6 +83,7 @@ var EightyApp = function() {
             });
             images = app.eliminateDuplicates(images);
 	    object.images = images;
+	    object.numImages = images.length;
 
 	    object.html = html;
         }
