@@ -35,7 +35,7 @@ var EightyApp = function() {
 			var link = app.makeLink(url, $(this).attr('href'));
 			if (link != null) {
 				var eightyvalue = app.get80Value(url);
-				if (eightyvalue == null) eighyvalue = url;
+				if (eightyvalue == null) eightyvalue = url;
 				link = app.append80FlagToLink(eightyvalue, link);
 				links.push(link);
 			}
