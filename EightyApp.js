@@ -82,12 +82,14 @@ var EightyAppBase = function() {
   this.get80Value = function(link) {
 
     if (link !== null) {
-      var query = link.split("?")[1];
-      var vars = query.split("&");
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == "80flag") {
-          return pair[1];
+      if (link.indexOf("?") >= 0) {
+        var query = link.split("?")[1];
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          if (pair[0] == "80flag") {
+            return pair[1];
+          }
         }
       }
     }
