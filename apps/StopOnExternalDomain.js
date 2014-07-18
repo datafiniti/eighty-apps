@@ -1,8 +1,3 @@
-/**************************************************************************
- * The processDocument returns a timestamp for when the URL was crawled,  *
- * the original URL that led to this URL being crawled, and the HTML.     *
- *************************************************************************/
-
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 		var app = this;
@@ -12,11 +7,6 @@ var EightyApp = function() {
 
 		// Get crawl date
 		object.dateCrawled = app.formatDate(Date.now());
-
-		// Get original URL
-		var eightyvalue = app.get80Value(url);
-		if (eighyvalue == null) eightyvalue = url;
-		object.startingURL = eightyvalue;
 
 		// Get HTML
 		object.html = html;
