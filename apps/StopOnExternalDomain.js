@@ -9,7 +9,7 @@ var EightyApp = function() {
 		object.dateCrawled = app.formatDate(Date.now());
 
 		// Get HTML
-		object.html = html;
+		object.status = status;
 
 		return JSON.stringify(object);
 	}
