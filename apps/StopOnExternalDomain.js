@@ -1,3 +1,6 @@
+// Keeps crawling until it hits an external domain and then stops.
+// Returns status code for every URL crawled.
+
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 		var app = this;
