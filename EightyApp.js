@@ -504,6 +504,87 @@ var EightyAppBase = function() {
 
   };
 
+  this.convertMonthToEnglish = function(month) {
+    month = month.toLowerCase();
+
+    var translate = {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December",
+      "gennaio": "January",
+      "febbraio": "February",
+      "marzo": "March",
+      "aprile": "April",
+      "maggio": "May",
+      "giugno": "June",
+      "luglio": "July",
+      "agosto": "August",
+      "settembre": "September",
+      "ottobre": "October",
+      "novembre": "November",
+      "dicembre": "December",
+      "janvier": "January",
+      "février": "February",
+      "mars": "March",
+      "avril": "April",
+      "mai": "May",
+      "juin": "June",
+      "juillet": "July",
+      "aoûtt": "August",
+      "septembre": "September",
+      "octobre": "October",
+      "novembre": "November",
+      "décembre": "December",
+      "januari": "January",
+      "februari": "February",
+      "maret": "March",
+      "april": "April",
+      "mei": "May",
+      "juni": "June",
+      "juli": "July",
+      "agustus": "August",
+      "september": "September",
+      "oktober": "October",
+      "november": "November",
+      "desember": "December",
+      "enero": "January",
+      "febrero": "February",
+      "marzo": "March",
+      "abril": "April",
+      "mayo": "May",
+      "junio": "June",
+      "julio": "July",
+      "agosto": "August",
+      "septiembre": "September",
+      "octubre": "October",
+      "noviembre": "November",
+      "diciembre": "December",
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    };
+
+    return translate[month];
+  };
+
   // converts a given relative timeframe from the current date (when crawled) to unix
   // ex: 9 weeks ago where 9 is the timeNumber and weeks is the timeMeasurement
   // output would be a unix timestamp that can be easily imported
