@@ -1,4 +1,4 @@
-// This 80app returns all links found on a page
+// This 80app returns all links and keywords, with their counts, found on a page
 
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
