@@ -70,8 +70,10 @@ var EightyAppBase = function() {
   this.append80FlagToLink = function(eightyvalue, link) {
 
     var returnLink = link;
-    if (link.indexOf("?") >= 0) {
-      returnLink = link + "&80flag=" + eightyvalue;
+    if (link.indexOf("?") >= 0 && !/\?$/.test(link)) {
+        returnLink = link + "&80flag=" + eightyvalue;
+    } else if (/\?$/.test(link)) {
+        returnLink = link + "80flag=" + eightyvalue;
     } else {
       returnLink = link + "?80flag=" + eightyvalue;
     }
