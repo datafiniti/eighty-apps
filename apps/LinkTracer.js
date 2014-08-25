@@ -15,7 +15,7 @@ var EightyApp = function() {
 
 		// Get original URL
 		var eightyvalue = app.get80Value(url);
-		if (eighyvalue == null) eightyvalue = url;
+		if (eightyvalue == null) eightyvalue = url;
 		object.startingURL = eightyvalue;
 
 		// Get HTML
