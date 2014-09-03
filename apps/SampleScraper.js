@@ -18,7 +18,7 @@ var EightyApp = function() {
 			var object = {};
 		
 			// Then we use JQuery to find all the attributes we want
-			object.name = $html.find('h1']).text();
+			object.name = $html.find('h1').text();
 			object.address = $html.find('span[itemprop="streetAddress"]').text();
 	                object.city = $html.find('span[itemprop="addressLocality"]').text();
         	        object.state = $html.find('span[itemprop="addressRegion"]').text();
