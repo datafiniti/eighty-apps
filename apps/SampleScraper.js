@@ -8,38 +8,51 @@
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 
-		// First we construct an HTML object so we can use Jquery
-		var app = this;
-		$ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var object = {};
-		
-		// Then we use JQuery to find all the attributes we want
-		object.name = $html.find('h1']).text();
-		object.address = $html.find('span[itemprop="streetAddress"]').text();
-                object.city = $html.find('span[itemprop="addressLocality"]').text();
-                object.state = $html.find('span[itemprop="addressRegion"]').text();
-                object.postalcode = $html.find('span[itemprop="postalCode"]').text();
-                object.contact = $html.find('div:contains("Contact:")').next().text();
+		// We only want to collect data from listing pages
+		if (url.match("/pro/") {
 
-		// Finally, we return the object as a string
-		return JSON.stringify(object);
+			// First we construct an HTML object so we can use Jquery
+			var app = this;
+			$ = jQuery;
+			var $html = app.parseHtml(html, $);
+			var object = {};
+		
+			// Then we use JQuery to find all the attributes we want
+			object.name = $html.find('h1']).text();
+			object.address = $html.find('span[itemprop="streetAddress"]').text();
+	                object.city = $html.find('span[itemprop="addressLocality"]').text();
+        	        object.state = $html.find('span[itemprop="addressRegion"]').text();
+                	object.postalcode = $html.find('span[itemprop="postalCode"]').text();
+	                object.contact = $html.find('dt:contains("Contact:")').next().text();
+
+			// Finally, we return the object as a string
+			return JSON.stringify(object);
+		}
 	}
 
 	this.parseLinks = function(html, url, headers, status, jQuery) {
 
+		// We construct the HTML object for Jquery again
 		var app = this;
 		var $ = jQuery;
 		var $html = app.parseHtml(html, $);
 		var links = [];
 
-		// gets all links in the html document
-		$html.find('a').each(function(i, obj) {
+		// We add all the pages in the directory
+		$html.find('a.pageNumber').each(function(i, obj) {
 			var link = app.makeLink(url, $(this).attr('href'));
 			if(link != null) {
 				links.push(link);
 			}
 		});
+
+		// We add all the listings in the directory
+                $html.find('a.pro-title').each(function(i, obj) {
+                        var link = app.makeLink(url, $(this).attr('href'));
+                        if(link != null) {
+                                links.push(link);
+                        }
+                });
 
 		return links;
 	}
