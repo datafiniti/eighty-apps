@@ -97,7 +97,9 @@ var EightyAppBase = function() {
     }
     return null;
   };
-
+  
+  // IMPORTANT Usage Note: Use makeLink on a url BEFORE appending an 80flag for review URLs. Otherwise 
+  // it will match on the sourceURL rather than the actual url
   this.makeLink = function(url, link) {
     try {
       // checks if link has domain (i.e. www.domain.com; search.domain.com; www.domain.edu.eu)
