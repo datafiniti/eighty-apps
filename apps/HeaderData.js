@@ -7,7 +7,7 @@ var EightyApp = function() {
                 var $html = app.parseHtml(html, $);
                 var object = {};
 
-		var headersArray = headers.split(\r\n);
+		var headersArray = headers.split("\r\n");
 		for (var i = 0; i < headersArray.length; i++) {
 			var keyvalArray = headersArray[i].split(": ");
 			var key = keyvalArray[0];
