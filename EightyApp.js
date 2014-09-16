@@ -97,21 +97,25 @@ var EightyAppBase = function() {
     }
     return null;
   };
-  
-  // IMPORTANT Usage Note: Use makeLink on a url BEFORE appending an 80flag for review URLs. Otherwise 
+
+  // IMPORTANT Usage Note: Use makeLink on a url BEFORE appending an 80flag for review URLs. Otherwise
   // it will match on the sourceURL rather than the actual url
   this.makeLink = function(url, link) {
     try {
-      // checks if link has domain (i.e. www.domain.com; search.domain.com; www.domain.edu.eu)
-      if (!link.match(/[a-z]+\.[a-z]+\.[a-z]+/)) {
+      // checks if link has domain (i.e. domain.com, www.domain.com; search.domain.com; www.domain.edu.eu)
+      if (!link.match(/[a-z]*?\.*?[a-z]+\.[a-z]+/)) {
         var host = url.match(/^http[s]?:\/\/[^/]+/);
-        host = host ? host[0] : null;
+        host = host ? host[0] : "http://" + url;
         // checks if link starts with backslash.
-        if (link.match(/^\//g)) {
+        // link.match(/^\//g)
+        if (link[0] == "/" && url[url.length -1] == "/") {
+          host = host.substring(0, host.length - 1);
           return host + link;
         // Adds backslash when needed
-        } else {
+        } else if (!(link[0] == "/") && !(url[url.length -1] == "/"))  {
           return host + '/' + link;
+        } else {
+          return host + link;
         }
       // checks if link is just missing http://
       } else if (!link.match(/^http[s]?:\/\//)) {
