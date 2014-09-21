@@ -102,28 +102,29 @@ var EightyAppBase = function() {
   // it will match on the sourceURL rather than the actual url
   this.makeLink = function(url, link) {
     try {
-      // checks if link has domain (i.e. domain.com, www.domain.com; search.domain.com; www.domain.edu.eu)
-      if (!link.match(/[a-z]*?\.*?[a-z]+\.[a-z]+/)) {
+    	// Checks link for http or https first and returns it if it is already a valid link
+    	if (link.match(/^http:\/\//) || link.match(/^https:\/\//)) {
+    		return link;
+      // checks if link has domain with characters, numbers, hyphens and no / or quotes (i.e. domain.com, www.domain-101.com; search.domain101.com; www.domain.edu.eu)
+    	} else if (!link.match(/^[\w.\-][^\"]*\./i)) {
         var host = url.match(/^http[s]?:\/\/[^/]+/);
         host = host ? host[0] : "http://" + url;
         // checks if link starts with backslash.
         // link.match(/^\//g)
-        if (link[0] == "/" && url[url.length -1] == "/") {
+        if (link[0] == "/" && host[host.length -1] == "/") {
           host = host.substring(0, host.length - 1);
           return host + link;
         // Adds backslash when needed
-        } else if (!(link[0] == "/") && !(url[url.length -1] == "/"))  {
+        } else if (!(link[0] == "/") && !(host[host.length -1] == "/"))  {
           return host + '/' + link;
         } else {
           return host + link;
         }
-      // checks if link is just missing http://
-      } else if (!link.match(/^http[s]?:\/\//)) {
-      return "http://" + link;
-    // returns original link if nothing needs to be added to it
+      // adds http:// to link if determines it already has a domain
       } else {
-      return link;
-      }
+      	return "http://" + link;
+    	}
+    // returns original link if nothing needs to be added to it
     } catch (e) {
       // returns the original link
       return link;
