@@ -22,7 +22,7 @@ var EightyApp = function() {
                 var links = [];
                 $html.find('a').each(function(i, obj) {
                         var link = app.makeLink(url, $(this).attr('href'));
-			if (containsFileExtensions(link)) {
+			if (link && containsFileExtensions(link)) {
 	                        if (link != null) {
 					links.push(link);
                 	        }
