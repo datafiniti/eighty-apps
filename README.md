@@ -50,10 +50,11 @@ Note that if you use the parseHTML method in EightyApp.js, "img" tags will be ch
 The new version of Voltron - Mauler - uses an extended version of Cheerio, a lighter weight version of jQuery. You will still write functions in the same manner as before (ex: $html.find('selector').parent()); however, in order for Cheerio to obtain its faster speed, it only uses certain core jQuery functions. You can see the list of already implemented Cheerio functions that are available to you here: http://cheeriojs.github.io/cheerio/
 
 Our extended version of Cheerio also includes a number of other functions that are available for your use. These include:
-	- .not
-	- .makeArray
-	- .each
-	- .filter
-	- .prop
+
+	* .not
+	* .makeArray
+	* .each
+	* .filter
+	* .prop
 
 We are currently working on implementing the pseudo selectors :eq and :first (ex: $html.find('div:eq(1)')). Check here or our <a href="https://80legs.groovehq.com/knowledge_base/topics/extended-cheerio-jquery-functionality-for-custom-crawls">knowledge base</a> for updated Cheerio functionality.
