@@ -17,22 +17,27 @@ var EightyApp = function() {
         $html.find('table[id="overviewTable"] tr').each(function(i, obj) {
           var overviewDetail = {};
           overviewDetail.label = $(this).find('td.label').text().trim();
-          overviewDetail.value = $(this).find('td:eq(1)').text().trim();
+          overviewDetail.value = $(this).find('td').first().next().text().trim();
           object.overviewDetails.push(overviewDetail);
         });
 
         object.bioDetails = [];
-        $html.find('div[class="soda"').each(function(i, obj) {
+        $html.find('div[class="soda odd"]').each(function(i, obj) {
           var bioDetail = {};
           bioDetail.value = $(this).text().trim();
-          object.bioDetails.push(bioDetails);
+          object.bioDetails.push(bioDetail);
+        });
+        $html.find('div[class="soda even"]').each(function(i, obj) {
+          var bioDetail = {};
+          bioDetail.value = $(this).text().trim();
+          object.bioDetails.push(bioDetail);
         });
 
         object.salaries = [];
         $html.find('table[id="salariesTable"] tr').each(function(i, obj) {
           var salary = {};
-          salary.project = $(this).find('td:eq(0)').text().trim();
-          salary.value = $(this).find('td:eq(1)').text().trim();
+          salary.project = $(this).find('td').first().text().trim();
+          salary.value = $(this).find('td').first().next().text().trim();
           object.salaries.push(salary);
         });
 
@@ -42,7 +47,7 @@ var EightyApp = function() {
         object.name = $html.find('h3[itemprop="name"]').text().trim();
 
         object.awards = [];
-        $html.find('table[id="awards"] tr').each(function(i, obj) {
+        $html.find('table[class="awards"] tr').each(function(i, obj) {
           var award = {};
           award.year = $(this).find('td.award_year').text().trim();
           award.outcome = $(this).find('td.award_outcome').text().trim();
@@ -76,11 +81,18 @@ var EightyApp = function() {
 //        object. = $html.find('').text().trim();
 
         object.filmography = [];
-        $html.find('div[class="filmo-row"]').each(function(i, obj) {
+        $html.find('div[class="filmo-row odd"]').each(function(i, obj) {
           var filmographyCredit = {};
           filmographyCredit.date = $(this).find('span.year_column').text().trim();
           filmographyCredit.title = $(this).find('b').text().trim();
-          filmographyCredit.role = $(this).find('a:eq(1)').text().trim();
+          filmographyCredit.role = $(this).find('a').first().text().trim();
+          object.filmography.push(filmographyCredit);
+        });
+        $html.find('div[class="filmo-row even"]').each(function(i, obj) {
+          var filmographyCredit = {};
+          filmographyCredit.date = $(this).find('span.year_column').text().trim();
+          filmographyCredit.title = $(this).find('b').text().trim();
+          filmographyCredit.role = $(this).find('a').first().text().trim();
           object.filmography.push(filmographyCredit);
         });
 
@@ -96,6 +108,11 @@ var EightyApp = function() {
     var links = [];
 
     $html.find('div[id="maindetails_quicklinks"] a').each(function(i, obj) {
+      var link = app.makeLink(url, $(this).attr('href'));
+      links.push(link);
+    });
+
+    $html.find('ul[class="quicklinks"] a').each(function(i, obj) {
       var link = app.makeLink(url, $(this).attr('href'));
       links.push(link);
     });
