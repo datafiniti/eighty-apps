@@ -107,15 +107,34 @@ var EightyApp = function() {
     var $html = app.parseHtml(html, $);
     var links = [];
 
-    $html.find('div[id="maindetails_quicklinks"] a').each(function(i, obj) {
-      var link = app.makeLink(url, $(this).attr('href'));
-      links.push(link);
-    });
+    if (url.match("search/name")) {
+      
+      if (url.match("start=")) {
+        $html.find('td[class="name"] a').each(function(i, obj) {
+          if ($(this).attr('href').match("/name/")) {
+            var link = app.makeLink(url, $(this).attr('href'));
+            links.push(link);
+          }
+        });
+      } else {
+        for (i = 1; i < 73000; i++) {
+          var link = url + "&start=" + (i*50 + 1);
+          links.push(link);
+        }
+      }
 
-    $html.find('ul[class="quicklinks"] a').each(function(i, obj) {
-      var link = app.makeLink(url, $(this).attr('href'));
-      links.push(link);
-    });
+    } else {
+
+      $html.find('div[id="maindetails_quicklinks"] a').each(function(i, obj) {
+        var link = app.makeLink(url, $(this).attr('href'));
+        links.push(link);
+      });
+
+      $html.find('ul[class="quicklinks"] a').each(function(i, obj) {
+        var link = app.makeLink(url, $(this).attr('href'));
+        links.push(link);
+      });
+    }
 
     return links;
   };
@@ -132,4 +151,3 @@ try {
   console.log("Eighty app exists.");
   EightyApp.prototype = new EightyAppBase();
 }
-
