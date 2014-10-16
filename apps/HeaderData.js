@@ -7,15 +7,19 @@ var EightyApp = function() {
                 var $html = app.parseHtml(html, $);
                 var object = {};
 
-		var headersArray = headers.split("\r\n");
-		for (var i = 0; i < headersArray.length; i++) {
-			var keyvalArray = headersArray[i].split(": ");
-			var key = keyvalArray[0];
-			var value = keyvalArray[1];
-			object[key] = value;
-		}
+                if(typeof headers == 'string' || headers instanceof String) {
+                        var headersArray = headers.split("\r\n");
+                        for (var i = 0; i < headersArray.length; i++) {
+                                var keyvalArray = headersArray[i].split(": ");
+                                var key = keyvalArray[0];
+                                var value = keyvalArray[1];
+                                object[key] = value;
+                        }
 
-                return JSON.stringify(object);
+                        return JSON.stringify(object);
+                }
+
+                return JSON.stringify(headers);
         }
 
         this.parseLinks = function(html, url, headers, status, jQuery) {
@@ -27,7 +31,6 @@ var EightyApp = function() {
                 // gets all links in the html document
                 $html.find('a').each(function(i, obj) {
                         var link = app.makeLink(url, $(this).attr('href'));
-
                         if(link != null) {
                                 links.push(link);
                         }
