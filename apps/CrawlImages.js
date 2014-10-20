@@ -1,3 +1,6 @@
+// This 80app collects image data from each image URL it crawls.
+// The images are stored as 64 bit encoded strings.
+
 var EightyApp = function() {
 
     this.processDocument = function(html, url, headers, status, jQuery) {
