@@ -117,7 +117,7 @@ var EightyApp = function() {
           }
         });
 
-	var link = app.makeLink($html.find('span.pagination a').attr('href'));
+	var link = app.makeLink(url, $html.find('span.pagination a').attr('href'));
 	links.push(link);
       }
 
