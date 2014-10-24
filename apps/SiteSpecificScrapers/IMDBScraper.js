@@ -116,11 +116,9 @@ var EightyApp = function() {
             links.push(link);
           }
         });
-      } else {
-        for (i = 1; i < 73000; i++) {
-          var link = url + "&start=" + (i*50 + 1);
-          links.push(link);
-        }
+
+	var link = app.makeLink($html.find('span.pagination a').attr('href'));
+	links.push(link);
       }
 
     } else {
