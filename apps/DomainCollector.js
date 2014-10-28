@@ -1,3 +1,6 @@
+// This 80app returns the count of every domain linked from each URL crawled
+// The 80app will only crawl to links on the current domain.
+
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
                 var app = this;
