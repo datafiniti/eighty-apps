@@ -1,6 +1,3 @@
-// This 80app returns a counts of all domains found on a URL.
-// It only crawls links from the current domain being crawled.
-
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
                 var app = this;
@@ -13,17 +10,17 @@ var EightyApp = function() {
 		var r = /:\/\/(.[^/]+)/;
 
                 $html.find('a').each(function(i, obj) {
-                        // console.log($(this).attr('href'));
                         var link = app.makeLink(url, $(this).attr('href'));
-			var linkDomain = link.match(r)[1];
-
-                        if (linkDomain in domainCount) {
-				domainCount[linkDomain] = domainCount[linkDomain] + 1;
-                        } else {
-				domainCount[linkDomain] = 1;
+			if (link != null) {
+				var linkDomain = link.match(r)[1];
+        	                if (linkDomain in domainCount) {
+					domainCount[linkDomain] = domainCount[linkDomain] + 1;
+                        	} else {
+					domainCount[linkDomain] = 1;
+				}
 			}
                 });
-		object.links = links;
+		object.domainCount = domainCount;
 
                 return JSON.stringify(object);
 	}
