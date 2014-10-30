@@ -97,6 +97,58 @@ var EightyApp = function() {
         });
 
       }
+    } else if (url.match("title/")) {
+
+      if (url.match("fullcredits")) {
+
+
+      } else if (url.match("plotsummary")) {
+
+      } else if (url.match("certification")) {
+
+      } else if (url.match("locations")) {
+
+      } else if (url.match("/business")) {
+
+      } else if (url.match("/companycredits")) {
+
+      } else if (url.match("/technical")) {
+
+      } else if (url.match("/trivia")) {
+
+      } else if (url.match("/soundtrack")) {
+
+      } else {
+      
+        object.data_type = "movie";
+        object.title = $html.find('span[itemprop="name"]').text().trim();      
+        object.date = $html.find('meta[itemprop="datePublished"]').attr('content').trim();
+        object.runningtime = $html.find('time[itemprop="duration"]').text().trim();
+
+        object.categories = [];
+        $html.find('div[itemprop="genre"] a').each(function(i, obj) {
+          object.categories.push($(this).text());
+        });
+
+        object.country = $html.find('').text().trim();
+        object.description = $html.find('p[itemprop="description"]').text().trim();
+        object.director = $html.find('div[itemprop="director"] span.itemprop').text().trim();
+
+	object.writers = [];
+	$html.find('div[itemprop="creator"] a').each(function(i, obj) {
+	  object.writers.push($(this).find('span').text().trim();
+	});
+
+        object.rating = $html.find('span[itemprop="ratingValue"]').text().trim();
+
+	object.details = [];
+	$html.find('div[id="titleDetails"] div.txt-block').each(function(i, obj) {
+	  var detail = {}
+	  detail.key = $(this).find('h4').text().trim();
+	  detail.value = $(this).text().trim();
+	  object.details.push(detail);
+	});
+      }
     }
 
     return JSON.stringify(object);
@@ -107,7 +159,13 @@ var EightyApp = function() {
     var $html = app.parseHtml(html, $);
     var links = [];
 
-    if (url.match("search/name")) {
+    if (url.match("/title")) {
+      
+      $html.find('div.see-more a').each(function(i, obj) {
+	var link = app.makeLink(url, $(this).attr('href'));
+      });
+
+    } else if (url.match("search/name")) {
       
       if (url.match("start=")) {
         $html.find('td[class="name"] a').each(function(i, obj) {
@@ -132,6 +190,16 @@ var EightyApp = function() {
         var link = app.makeLink(url, $(this).attr('href'));
         links.push(link);
       });
+
+      $html.find('div[class="filmo-row odd"]').each(function(i, obj) {
+	var link = app.makeLink(url, $(this).attr('href'));
+	links.push(link);
+      });
+      $html.find('div[class="filmo-row even"]').each(function(i, obj) {
+        var link = app.makeLink(url, $(this).attr('href'));
+        links.push(link);
+      });
+
     }
 
     return links;
