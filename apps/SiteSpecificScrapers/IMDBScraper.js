@@ -77,8 +77,6 @@ var EightyApp = function() {
         object.publicityListings = $html.find('div[id="details-publicity-listings"]').text().trim();
         object.alternateNames = $html.find('div[id="details-akas"]').text().trim();
         object.height = $html.find('div[id="details-height"]').text().trim();
-//        object. = $html.find('').text().trim();
-//        object. = $html.find('').text().trim();
 
         object.filmography = [];
         $html.find('div[class="filmo-row odd"]').each(function(i, obj) {
@@ -101,27 +99,20 @@ var EightyApp = function() {
 
       if (url.match("fullcredits")) {
 
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
 
-      } else if (url.match("plotsummary")) {
-
-      } else if (url.match("certification")) {
-
-      } else if (url.match("locations")) {
-
-      } else if (url.match("/business")) {
-
-      } else if (url.match("/companycredits")) {
-
-      } else if (url.match("/technical")) {
-
-      } else if (url.match("/trivia")) {
-
-      } else if (url.match("/soundtrack")) {
+	object.cast = [];
+	$html.find('tr.odd').each(function(i, obj) {
+	  var castmember = {};
+	  var castmember.name = $(this).find('td[itemprop="actor"] span[itemprop="name"]').text().trim();
+          var castmember.role = $(this).find('td.character div').text().trim();
+	});
 
       } else {
       
         object.data_type = "movie";
-        object.title = $html.find('span[itemprop="name"]').text().trim();      
+        object.title = $html.find('h1.header span[itemprop="name"]').text().trim();
         object.date = $html.find('meta[itemprop="datePublished"]').attr('content').trim();
         object.runningtime = $html.find('time[itemprop="duration"]').text().trim();
 
@@ -130,29 +121,30 @@ var EightyApp = function() {
           object.categories.push($(this).text());
         });
 
-        object.country = $html.find('').text().trim();
         object.description = $html.find('p[itemprop="description"]').text().trim();
         object.director = $html.find('div[itemprop="director"] span.itemprop').text().trim();
 
 	object.writers = [];
 	$html.find('div[itemprop="creator"] a').each(function(i, obj) {
-	  object.writers.push($(this).find('span').text().trim();
+	  object.writers.push($(this).find('span').text().trim());
 	});
 
         object.rating = $html.find('span[itemprop="ratingValue"]').text().trim();
 
 	object.details = [];
 	$html.find('div[id="titleDetails"] div.txt-block').each(function(i, obj) {
-	  var detail = {}
-	  detail.key = $(this).find('h4').text().trim();
-	  detail.value = $(this).text().trim();
+	  var detail = {};
+	  detail.key = $(this).find('h4').text().trim().replace(":","");
+	  detail.value = $(this).text().trim().replace(/^.*?:/,"");
 	  object.details.push(detail);
 	});
+
       }
     }
 
     return JSON.stringify(object);
   };
+
   this.parseLinks = function(html, url, headers, status, jQuery) {
     var app = this;
     $ = jQuery;
@@ -163,6 +155,7 @@ var EightyApp = function() {
       
       $html.find('div.see-more a').each(function(i, obj) {
 	var link = app.makeLink(url, $(this).attr('href'));
+        links.push(link);
       });
 
     } else if (url.match("search/name")) {
@@ -191,13 +184,17 @@ var EightyApp = function() {
         links.push(link);
       });
 
-      $html.find('div[class="filmo-row odd"]').each(function(i, obj) {
+      $html.find('div[class="filmo-row odd"] a').each(function(i, obj) {
 	var link = app.makeLink(url, $(this).attr('href'));
-	links.push(link);
+        if (!link.match("/character")) {
+  	  links.push(link);
+        }
       });
-      $html.find('div[class="filmo-row even"]').each(function(i, obj) {
+      $html.find('div[class="filmo-row even"] a').each(function(i, obj) {
         var link = app.makeLink(url, $(this).attr('href'));
-        links.push(link);
+        if (!link.match("/character")) {
+  	  links.push(link);
+        }
       });
 
     }
