@@ -122,12 +122,116 @@ var EightyApp = function() {
 	object.title = $html.find('h3[itemprop="name"] a').text().trim();
 
         object.trivia = [];
-        $html.find('div[class="soda odd"]').each(function(i, obj) {
+        $html.find('div[class="sodatext"]').each(function(i, obj) {
           object.trivia.push($(this).text().trim());
         });
-        $html.find('div[class="soda even"]').each(function(i, obj) {
-          object.trivia.push($(this).text().trim());
-        });	
+
+      } else if (url.match("/quotes")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.quotes = [];
+        $html.find('div[class="sodatext"]').each(function(i, obj) {
+          object.quotes.push($(this).text().trim());
+        });
+
+      } else if (url.match("/plotsummary")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.plots = [];
+        $html.find('p[class="plotSummary"]').each(function(i, obj) {
+          object.plots.push($(this).text().trim());
+        });
+
+      } else if (url.match("/releaseinfo")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.releasedates = [];
+        $html.find('table[id="release_dates"] tr').each(function(i, obj) {
+	  var releasedate = {};
+	  releasedate.location = $(this).find('td').first().text().trim();
+	  releasedate.date = $(this).find('td').next().text().trim();
+          object.releasedates.push(releasedate);
+        });
+
+      } else if (url.match("/companycredits")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.companycredits = [];
+        $html.find('ul.simpleList li').each(function(i, obj) {
+          object.companycredits.push($(this).text().trim());
+        });
+
+      } else if (url.match("/parentalguide")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.certifications = [];
+        $html.find('div.info div.info-content a').each(function(i, obj) {
+	  if ($(this).attr('href').match("certificates")) {
+            object.certifications.push($(this).text().trim());
+	  }
+        });
+
+      } else if (url.match("/locations")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.locations = [];
+        $html.find('div[class="soda sodavote even"]').each(function(i, obj) {
+          object.locations.push($(this).find('dt').text().trim());
+        });
+        $html.find('div[class="soda sodavote odd"]').each(function(i, obj) {
+          object.locations.push($(this).find('dt').text().trim());
+        });
+
+      } else if (url.match("/awards")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.awards = [];
+        $html.find('td.award_description').each(function(i, obj) {
+          var award = {};
+          award.value = $(this).text().trim();
+          award.status = $(this).parent().find('td.title_award_outcome').text().trim();
+          object.awards.push(award);
+        });
+
+      } else if (url.match("/technical")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.technicalspecs = [];
+        $html.find('table[class="dataTable labelValueTable"] tr').each(function(i, obj) {
+          var technicalspec = {};
+          technicalspec.key = $(this).find('td.label').text().trim();
+          technicalspec.value = $(this).find('td').next().text().trim();
+          object.technicalspecs.push(technicalspec);
+        });
+
+      } else if (url.match("/soundtrack")){
+
+        object.data_type = "movie";
+        object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.soundtrack = [];
+        $html.find('div[class="soundTrack soda odd"]').each(function(i, obj) {
+          object.soundtrack.push($(this).text().trim());
+        });
+        $html.find('div[class="soundTrack soda odd"]').each(function(i, obj) {
+          object.soundtrack.push($(this).text().trim());
+        });
 
       } else {
       
