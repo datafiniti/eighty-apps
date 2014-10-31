@@ -105,9 +105,29 @@ var EightyApp = function() {
 	object.cast = [];
 	$html.find('tr.odd').each(function(i, obj) {
 	  var castmember = {};
-	  var castmember.name = $(this).find('td[itemprop="actor"] span[itemprop="name"]').text().trim();
-          var castmember.role = $(this).find('td.character div').text().trim();
+	  castmember.name = $(this).find('td[itemprop="actor"] span[itemprop="name"]').text().trim();
+          castmember.role = $(this).find('td.character div').text().trim();
+	  object.cast.push(castmember);
 	});
+        $html.find('tr.even').each(function(i, obj) {
+          var castmember = {};
+          castmember.name = $(this).find('td[itemprop="actor"] span[itemprop="name"]').text().trim();
+          castmember.role = $(this).find('td.character div').text().trim();
+          object.cast.push(castmember);
+        });
+
+      } else if (url.match("/trivia?ref_=tt_ql_trv_1")){
+
+	object.data_type = "movie";
+	object.title = $html.find('h3[itemprop="name"] a').text().trim();
+
+        object.trivia = [];
+        $html.find('div[class="soda odd"]').each(function(i, obj) {
+          object.trivia.push($(this).text().trim());
+        });
+        $html.find('div[class="soda even"]').each(function(i, obj) {
+          object.trivia.push($(this).text().trim());
+        });	
 
       } else {
       
@@ -157,6 +177,12 @@ var EightyApp = function() {
 	var link = app.makeLink(url, $(this).attr('href'));
         links.push(link);
       });
+
+      $html.find('ul[class="quicklinks"] a').each(function(i, obj) {
+        var link = app.makeLink(url, $(this).attr('href'));
+        links.push(link);
+      });
+
 
     } else if (url.match("search/name")) {
       
