@@ -10,7 +10,6 @@ var EightyApp = function() {
         object.width = imageDimensions.width;
         object.height = imageDimensions.height;
         object.base64 = html;
-        object.binary = imageBuffer;
         object.source_url = url.replace("?80flag=type:image", "");
 
         return JSON.stringify(object);
