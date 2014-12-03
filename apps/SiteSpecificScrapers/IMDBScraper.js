@@ -21,6 +21,14 @@ var EightyApp = function() {
           object.overviewDetails.push(overviewDetail);
         });
 
+        object.spouseDetails = [];
+        $html.find('table[id="tableSpouses"] tr').each(function(i, obj) {
+          var spouseDetail = {};
+          spouseDetail.label = $(this).find('td').first().text().trim();
+          spouseDetail.value = $(this).find('td').first().next().text().trim();
+          object.spouseDetails.push(spouseDetail);
+        });
+
         object.bioDetails = [];
         $html.find('div[class="soda odd"]').each(function(i, obj) {
           var bioDetail = {};
