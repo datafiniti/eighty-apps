@@ -29,9 +29,8 @@ var EightyApp = function() {
           object.spouseDetails.push(spouseDetail);
         });
 
-	var miniBioRE = /<h4 class="li_group">Mini Bio.*?<\/h4>[\s\S]*?<a name=/;
-	var sectionHTML = $html.find('div[id="bio_content"]').html();
-	var $sectionObject = app.parseHtml(sectionHTML, $);
+	var miniBioRE = /<h4 class="li_group">Mini Bio.*?<\/h4>[\s\S]*?<a name.*?><\/a>/;
+	var $sectionObject = $(app.parseHTML(html.match(miniBioRE)));
 	object.miniBioDetails = [];
 	$sectionObject.find('div[class="soda odd"]').each(function(i, obj) {
 	  var sectionItem = {};
