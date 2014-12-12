@@ -30,7 +30,7 @@ var EightyAppBase = function() {
   
    // This is the same as getPlainText, except it does not remove any characters, just extra whitespace and whitespace characters (\t, \n, \r)
   this.removeExtraWhitespace = function(text) {
-    return text..replace(/\s{2,}/g, ' ').replace(/\s/g, ' ').replace(/^\s\s*/, "").replace(/\s\s*$/, "");
+    return text.replace(/\s{2,}/g, ' ').replace(/\s/g, ' ').replace(/^\s\s*/, "").replace(/\s\s*$/, "");
   }
 
   // decode unicode by inputting a selective regex and a string
