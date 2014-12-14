@@ -8,7 +8,7 @@ var EightyApp = function() {
 		var object = {};
 
                 // gets all regex matches in the html document
-		var regexpattern = /80legs/;
+		var regexpattern = /your_regex_here/g;
                 var matches = html.match(regexpattern);
 		object.matches = matches;
 
