@@ -30,38 +30,39 @@ var EightyApp = function() {
         });
 
         object.miniBioDetails = [];
-        $html.find('a[name="mini_bio"]').next().next().find('p').each(function(i, obj) {
+        $html.find('a[name="mini_bio"]').next().nextUntil('a').each(function(i, obj) {
           var miniBioDetail = {};
           miniBioDetail.value = $(this).text().trim();
           object.miniBioDetails.push(miniBioDetail);
         });
 
         object.spouseDetails = [];
-        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
+        $html.find('table[id="tableSpouses"] tr').each(function(i, obj) {
           var spouseDetail = {};
-          spouseDetail.value = $(this).text().trim();
+	  spouseDetail.name = $(this).find('td').first().text().trim();
+          spouseDetail.value = $(this).find('td').first().next().text().trim();
           object.spouseDetails.push(spouseDetail);
         });
 
         object.trademarkDetails = [];
-        $html.find('a[name="trademark"]').next().next().find('p').each(function(i, obj) {
+        $html.find('a[name="trademark"]').next().nextUntil('a').each(function(i, obj) {
           var trademarkDetail = {};
           trademarkDetail.value = $(this).text().trim();
           object.trademarkDetails.push(trademarkDetail);
         });
 
         object.personalQuotes = [];
-        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
+        $html.find('a[name="quotes"]').next().nextUntil('a').each(function(i, obj) {
           var personalQuote = {};
           personalQuote.value = $(this).text().trim();
           object.personalQuotes.push(personalQuote);
         });
 
-        object.spouseDetails = [];
-        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
-          var spouseDetail = {};
-          spouseDetail.value = $(this).text().trim();
-          object.spouseDetails.push(spouseDetail);
+        object.triviaDetails = [];
+        $html.find('a[name="trivia"]').next().nextUntil('a').each(function(i, obj) {
+          var triviaDetail = {};
+          triviaDetail.value = $(this).text().trim();
+          object.triviaDetails.push(triviaDetail);
         });
 
         object.bioDetails = [];
