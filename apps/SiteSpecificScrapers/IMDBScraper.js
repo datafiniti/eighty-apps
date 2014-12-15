@@ -33,7 +33,35 @@ var EightyApp = function() {
         $html.find('a[name="mini_bio"]').next().next().find('p').each(function(i, obj) {
           var miniBioDetail = {};
           miniBioDetail.value = $(this).text().trim();
-          object.miniBioDetails.push(bioDetail);
+          object.miniBioDetails.push(miniBioDetail);
+        });
+
+        object.spouseDetails = [];
+        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
+          var spouseDetail = {};
+          spouseDetail.value = $(this).text().trim();
+          object.spouseDetails.push(spouseDetail);
+        });
+
+        object.trademarkDetails = [];
+        $html.find('a[name="trademark"]').next().next().find('p').each(function(i, obj) {
+          var trademarkDetail = {};
+          trademarkDetail.value = $(this).text().trim();
+          object.trademarkDetails.push(trademarkDetail);
+        });
+
+        object.personalQuotes = [];
+        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
+          var personalQuote = {};
+          personalQuote.value = $(this).text().trim();
+          object.personalQuotes.push(personalQuote);
+        });
+
+        object.spouseDetails = [];
+        $html.find('a[name="spouse"]').next().next().find('p').each(function(i, obj) {
+          var spouseDetail = {};
+          spouseDetail.value = $(this).text().trim();
+          object.spouseDetails.push(spouseDetail);
         });
 
         object.bioDetails = [];
