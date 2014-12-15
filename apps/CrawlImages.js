@@ -1,52 +1,21 @@
 var EightyApp = function() {
-
     this.processDocument = function(html, url, headers, status, jQuery) {
-        // Create empty object for storing image information.
-        var object = {};
+        var object = {},
+            sizeOf = require('image-size'),
+            imageBuffer = new Buffer(html, "base64"),
+            imageDimensions = sizeOf(imageBuffer),
+            imageSize = Buffer.byteLength(html, "base64");
 
-        // Check for 80flag that will indicate that the url is an image.
-        if (url.match("80flag=type:image")) {
-
-            // Append the correct prefix  based on image type.
-            var encodedString = "";
-            if (url.match(".jpg")) {
-                encodedString = "data:image/jpg;base64," + html;
-            } else if (url.match(".png")) {
-                encodedString = "data:image/png;base64," + html;
-            } else if (url.match(".gif")) {
-                encodedString = "data:image/gif;base64," + html;
-            }
-
-            // Generate a new image object, set source as the base64 encoded string.
-            var image = new Image();
-            image.src = encodedString;
-
-            // Convert the encoded string to binary.
-            var binary = atob(encodedString.split(",")[1]);
-            var len = binary.length;
-            var buffer = new ArrayBuffer(len);
-            var view = new Uint8Array(buffer);
-
-            // Get turn the binary into a blog to get the image size in bytes.
-            for (var i = 0; i < len; i++) {
-                view[i] = binary.charCodeAt(i);
-            }
-            var myBlob = new Blob([view]);
-
-            // Add information to object to be returned.
-            object.byteSize = myBlob.size;
-            object.width = image.width;
-            object.height = image.height;
-	    object.base64 = encodedString;
-            object.binary = binary;
-            object.source_url = url.replace("?80flag=type:image", "");
-
-        }
+        object.byteSize = imageSize;
+        object.width = imageDimensions.width;
+        object.height = imageDimensions.height;
+        object.base64 = html;
+        object.source_url = url.replace("?80flag=type:image", "");
 
         return JSON.stringify(object);
-    };
+    }
 
-    this.parseLinks = function(html, url, headers, status, $) {
+    this.parseLinks = function(html, url, headers, status, jQuery) {
         var links = [];
 
         // If already on an image url, just return the empty links array.
@@ -66,7 +35,7 @@ var EightyApp = function() {
                 links.push(link);
             });
 
-	    // gets all links in the html document
+            // gets all links in the html document
             $html.find('a').each(function(i, obj) {
                 var link = app.makeLink(url, $(this).attr('href'));
 
@@ -80,17 +49,16 @@ var EightyApp = function() {
             return links;
         }
 
-    };
-};
+    }
+}
 
 try {
     // Testing
     module.exports = function(EightyAppBase) {
         EightyApp.prototype = new EightyAppBase();
         return new EightyApp();
-    };
-
-} catch (e) {
+    }
+} catch(e) {
     // Production
     console.log("Eighty app exists.");
     EightyApp.prototype = new EightyAppBase();

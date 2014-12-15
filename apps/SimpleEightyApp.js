@@ -1,3 +1,5 @@
+// This 80app returns the full HTML of each URL crawled
+
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 		return html;
