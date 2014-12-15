@@ -29,14 +29,12 @@ var EightyApp = function() {
           object.spouseDetails.push(spouseDetail);
         });
 
-	var miniBioRE = /<h4 class="li_group">Mini Bio.*?<\/h4>[\s\S]*?<a name.*?><\/a>/;
-	var $sectionObject = $(app.parseHTML(html.match(miniBioRE)));
-	object.miniBioDetails = [];
-	$sectionObject.find('div[class="soda odd"]').each(function(i, obj) {
-	  var sectionItem = {};
-	  sectionItem.value = $(this).text().trim();
-	  object.miniBioDetails.push(sectionItem);
-	});
+        object.miniBioDetails = [];
+        $html.find('a[name="mini_bio"]').next().next().find('p').each(function(i, obj) {
+          var miniBioDetail = {};
+          miniBioDetail.value = $(this).text().trim();
+          object.miniBioDetails.push(bioDetail);
+        });
 
         object.bioDetails = [];
         $html.find('div[class="soda odd"]').each(function(i, obj) {
