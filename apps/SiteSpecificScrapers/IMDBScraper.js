@@ -373,6 +373,10 @@ var EightyApp = function() {
 
     }
 
+    for (var i = 0; i < links.length; i++) {
+      links[i] = links[i].substring(0,links[i].indexOf('?'));
+    }
+
     return links;
   };
 };
