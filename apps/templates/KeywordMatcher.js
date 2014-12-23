@@ -14,13 +14,14 @@ var EightyApp = function() {
 		});
 
                 // gets all keyword matches in the text
-		var keywordlist = [
+		var keywordList = [
 			"80legs",
 			"web"
 		];
-		var matches = []l
+		var matches = [];
 		for (i = 0; i < keywordList.length; i++) {
-                	matches.push(text.match(keywordList[i]));
+			var regex = new RegExp(keywordList[i],"gi");
+                	matches.push(text.match(regex));
 		}
 		object.matches = matches;
 
