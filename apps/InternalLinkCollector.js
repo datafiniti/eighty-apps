@@ -12,9 +12,9 @@ var EightyApp = function() {
 		var urlDomain = url.match(r)[1]
                 var links = [];
                 $html.find('a').each(function(i, obj) {
-                        // console.log($(this).attr('href'));
+                        app.say($(this).attr('href'));
                         var link = app.makeLink(url, $(this).attr('href'));
-
+                        app.say(link);
                         if(link != null) {
 				var linkDomain = link.match(r)[1];
 				if (urlDomain == linkDomain) {
@@ -22,7 +22,7 @@ var EightyApp = function() {
 				}
                         }
                 });
-		object.externalLinks = links;
+		object.internalLinks = links;
 
                 return JSON.stringify(object);
 	}
