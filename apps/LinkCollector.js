@@ -10,11 +10,14 @@ var EightyApp = function() {
                 // gets all links in the html document
                 var links = [];
                 $html.find('a').each(function(i, obj) {
-                        // console.log($(this).attr('href'));
                         var link = app.makeLink(url, $(this).attr('href'));
+			var text = $(this).text();
+			var linkObject = {};
+			linkObject.link = link;
+			linkObject.text = text;
 
-                        if(link != null) {
-				links.push(link);
+                        if (link != null) {
+				links.push(linkObject);
                         }
                 });
 		object.links = links;
