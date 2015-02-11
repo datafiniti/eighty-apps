@@ -173,6 +173,23 @@ var EightyAppBase = function() {
 
   };
 
+  this.normalizePrice = function(numberStr) {
+    var numberStrLen = numberStr.length;
+
+    var thirdLastChar = number.substr(numberStrLen - 3).substr(0,1);
+    if (thirdLastChar == "," || thirdLastChar == ".") {
+      decimals = numberStr.substr(numberStrLen - 2);
+      primary = numberStr.substr(0,numberStrLen - 3).replace(/,/g,"").replace(/./g,"");
+    } else {
+      primary = numberStr.replace(/,/g,"").replace(/./g,"");
+      decimals = "00";
+    }
+
+    var normalizedPrice = primary + "." + decimals;
+
+    return normalizedPrice;
+  };
+
   // Replace special characters
   this.replaceSpecialCharacters = function(string) {
     var stringWithSpecialCharacters = string;
