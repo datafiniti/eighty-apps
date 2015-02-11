@@ -5,6 +5,12 @@ var EightyAppBase = function() {
     authStatus = false;
   };
 
+  this.say = function(msg) {
+    process.send({
+      message: msg.toString()
+    })
+  }
+
   this.processDocument = function(html, url, headers, status, jQuery) {};
 
   this.parseLinks = function(html, url, headers, status, jQuery) {};
@@ -179,10 +185,10 @@ var EightyAppBase = function() {
     var thirdLastChar = numberStr.substr(numberStrLen - 3).substr(0,1);
     if (thirdLastChar == "," || thirdLastChar == ".") {
       decimals = numberStr.substr(numberStrLen - 2);
-      primary = numberStr.substr(0,numberStrLen - 3).replace(/,/g,"").replace(/./g,"");
+      primary = numberStr.substr(0,numberStrLen - 3).replace(/,/g,"").replace(/\./g,"");
     } else {
-      primary = numberStr.replace(/,/g,"").replace(/./g,"");
       decimals = "00";
+      primary = numberStr.replace(/,/g,"").replace(/\./g,"");
     }
 
     var normalizedPrice = primary + "." + decimals;
