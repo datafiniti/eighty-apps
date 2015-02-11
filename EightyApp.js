@@ -176,7 +176,7 @@ var EightyAppBase = function() {
   this.normalizePrice = function(numberStr) {
     var numberStrLen = numberStr.length;
 
-    var thirdLastChar = number.substr(numberStrLen - 3).substr(0,1);
+    var thirdLastChar = numberStr.substr(numberStrLen - 3).substr(0,1);
     if (thirdLastChar == "," || thirdLastChar == ".") {
       decimals = numberStr.substr(numberStrLen - 2);
       primary = numberStr.substr(0,numberStrLen - 3).replace(/,/g,"").replace(/./g,"");
