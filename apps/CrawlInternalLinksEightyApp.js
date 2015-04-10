@@ -6,7 +6,7 @@
 
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
-		return null;
+		return html;
 	}
 
 	this.parseLinks = function(html, url, headers, status, jQuery) {
@@ -20,13 +20,16 @@ var EightyApp = function() {
 
 		// gets all links in the html document
 		$html.find('a').each(function(i, obj) {
-			// console.log($(this).attr('href'));
 			var link = app.makeLink(url, $(this).attr('href'));
 
 			if(link != null) {
-	                        var linkDomain = link.match(r)[1]
-				if (urlDomain == linkDomain) {
-					links.push(link);
+				try {
+		                        var linkDomain = link.match(r)[1];
+					if (urlDomain == linkDomain) {
+						links.push(link);
+					}
+				} catch (err) {
+					
 				}
 			}
 		});
