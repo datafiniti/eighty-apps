@@ -19,7 +19,7 @@ var EightyApp = function() {
 
 		// Get keyword frequency
 		var keywordCount = {};
-		$html.find('p,h1,h2,h3,h4,h5').each(function() {
+		$html.find('p,h1,h2,h3,h4,h5,td,div').each(function() {
 			var textBlockArray = $(this).text().split(/,?\s+/);
 			for (var i = 0; i < textBlockArray.length; i++) {
 				var keyword = textBlockArray[i].toLowerCase();
