@@ -58,3 +58,10 @@ Our extended version of Cheerio also includes a number of other functions that a
 	* .prop
 
 We are currently working on implementing the pseudo selectors :eq and :first (ex: $html.find('div:eq(1)')); however, they are NOT currently implemented and WILL cause errors. Check here or our <a href="https://80legs.groovehq.com/knowledge_base/topics/extended-cheerio-jquery-functionality-for-custom-crawls">knowledge base</a> for updated Cheerio functionality.
+
+### CrawlImages.js
+
+To successfully use this app, the image url submmitted must contain an 'EightyFlag', a tag that indicates the url is an image.
+
+`http://www.example.com/exampleimage.jpg?80flag=type:image`
+
