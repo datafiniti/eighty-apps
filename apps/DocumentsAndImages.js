@@ -120,12 +120,14 @@ var EightyApp = function() {
                 // console.log($(this).attr('href'));
                 var link = app.makeLink(url, $(this).attr('href'));
 
-                if(link != null) {
-                    var linkDomain = link.match(r)[1]
-                    if (urlDomain == linkDomain) {
-                        links.push(link);
-                    }
-                }
+			    if (link != null) {
+                    var linkDomain = link.match(r);
+	                if (linkDomain && linkDomain.length > 1) {
+	                    linkDomain = linkDomain[1];
+				    if (urlDomain == linkDomain)
+				        links.push(link);
+	               }
+			    }
             });
 
             return links;
