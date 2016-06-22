@@ -91,7 +91,7 @@ var EightyApp = function() {
         return JSON.stringify(object);
     }
 
-    this.parseLinks = function(html, url, headers, status, $) {
+    this.parseLinks = function(html, url, headers, status, jQuery) {
         var links = [];
 
         // If already on an image url, just return the empty links array.
