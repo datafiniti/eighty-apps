@@ -12,19 +12,22 @@ var EightyApp = function() {
 		var urlDomain = url.match(r)[1]
                 var links = [];
                 $html.find('a').each(function(i, obj) {
-                        app.say($(this).attr('href'));
+                    if ($(this).attr('href')) {
                         var link = app.makeLink(url, $(this).attr('href'));
-                        app.say(link);
-                        if(link != null) {
-				var linkDomain = link.match(r)[1];
-				if (urlDomain == linkDomain) {
-					links.push(link);
-				}
-                        }
+			            if (link != null) {
+                            var linkDomain = link.match(r);
+	                        if (linkDomain && linkDomain.length > 1) {
+	                            linkDomain = linkDomain[1];
+				                if (urlDomain == linkDomain)
+				                    links.push(link);
+	                       }
+			            }
+			        }
                 });
+
 		object.internalLinks = links;
 
-                return JSON.stringify(object);
+        return JSON.stringify(object);
 	}
 
 	this.parseLinks = function(html, url, headers, status, jQuery) {
@@ -39,15 +42,17 @@ var EightyApp = function() {
 		// gets all links in the html document
 		$html.find('a').each(function(i, obj) {
 			// console.log($(this).attr('href'));
-			var link = app.makeLink(url, $(this).attr('href'));
+			    var link = app.makeLink(url, $(this).attr('href'));
 
-			if(link != null) {
-	                        var linkDomain = link.match(r)[1]
-				if (urlDomain == linkDomain) {
-					links.push(link);
-				}
-			}
-		});
+			    if (link != null) {
+                    var linkDomain = link.match(r);
+	                if (linkDomain && linkDomain.length > 1) {
+	                    linkDomain = linkDomain[1];
+				    if (urlDomain == linkDomain)
+				        links.push(link);
+	               }
+			    }
+		    });
 
 		return links;
 	}

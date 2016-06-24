@@ -49,13 +49,15 @@ var EightyApp = function() {
 			var link = app.makeLink(url, $(this).attr('href'));
 
 			if(link != null) {
-	                        var linkDomain = link.match(r)[1]
-				// only crawl link if domain is the same of current URL
-				if (urlDomain == linkDomain) {
-					// append 80flag
-					link = app.append80FlagToLink("your_value_here", link);
-					links.push(link);
-				}
+                var linkDomain = link.match(r);
+                if (linkDomain && linkDomain.length > 1) {
+                    linkDomain = linkDomain[1];
+				    // only crawl link if domain is the same of current URL
+				    if (urlDomain == linkDomain) {
+					    link = app.append80FlagToLink("your value here", link);
+					    links.push(link);
+				    }
+                }
 			}
 		});
 

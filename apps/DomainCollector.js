@@ -15,12 +15,13 @@ var EightyApp = function() {
                 $html.find('a').each(function(i, obj) {
                         var link = app.makeLink(url, $(this).attr('href'));
 			if (link != null) {
-				var linkDomain = link.match(r)[1];
-        	                if (linkDomain in domainCount) {
+				var linkDomain = link.match(r);
+				if (linkDomain && linkDomain.length > 1)
+				    linkDomain = linkDomain[1];
+        	    if (linkDomain in domainCount)
 					domainCount[linkDomain] = domainCount[linkDomain] + 1;
-                        	} else {
+                else 
 					domainCount[linkDomain] = 1;
-				}
 			}
                 });
 		object.domainCount = domainCount;
@@ -42,12 +43,14 @@ var EightyApp = function() {
 			// console.log($(this).attr('href'));
 			var link = app.makeLink(url, $(this).attr('href'));
 
-			if(link != null) {
-	                        var linkDomain = link.match(r)[1]
-				if (urlDomain == linkDomain) {
-					links.push(link);
-				}
-			}
+			    if (link != null) {
+                    var linkDomain = link.match(r);
+	                if (linkDomain && linkDomain.length > 1) {
+	                    linkDomain = linkDomain[1];
+				    if (urlDomain == linkDomain)
+				        links.push(link);
+	               }
+			    }
 		});
 
 		return links;
