@@ -13,9 +13,7 @@ var EightyApp = function() {
                 var links = [];
                 $html.find('a').each(function(i, obj) {
                     if ($(this).attr('href')) {
-                        app.say($(this).attr('href'));
                         var link = app.makeLink(url, $(this).attr('href'));
-                        app.say(link);
 			            if (link != null) {
                             var linkDomain = link.match(r);
 	                        if (linkDomain && linkDomain.length > 1) {
@@ -26,7 +24,7 @@ var EightyApp = function() {
 			            }
 			        }
                 });
-                
+
 		object.internalLinks = links;
 
         return JSON.stringify(object);
@@ -55,7 +53,7 @@ var EightyApp = function() {
 	               }
 			    }
 		    });
-		    
+
 		return links;
 	}
 }
