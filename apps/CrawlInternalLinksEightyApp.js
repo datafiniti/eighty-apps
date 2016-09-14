@@ -25,7 +25,7 @@ var EightyApp = function() {
 			if(link != null) {
 				try {
 		                        var linkDomain = link.match(r)[1];
-					if (urlDomain == linkDomain) {
+					if (urlDomain.toLowerCase() == linkDomain.toLowerCase()) {
 						links.push(link);
 					}
 				} catch (err) {
