@@ -124,7 +124,7 @@ var EightyApp = function() {
                     var linkDomain = link.match(r);
 	                if (linkDomain && linkDomain.length > 1) {
 	                    linkDomain = linkDomain[1];
-				    if (urlDomain == linkDomain)
+				    if (urlDomain.toLowerCase() == linkDomain.toLowerCase())
 				        links.push(link);
 	               }
 			    }
@@ -148,5 +148,3 @@ try {
     console.log("Eighty app exists.");
     EightyApp.prototype = new EightyAppBase();
 }
-
-

@@ -53,7 +53,7 @@ var EightyApp = function() {
                 if (linkDomain && linkDomain.length > 1) {
                     linkDomain = linkDomain[1];
 				    // only crawl link if domain is the same of current URL
-				    if (urlDomain == linkDomain) {
+				    if (urlDomain.toLowerCase() == linkDomain.toLowerCase()) {
 					    link = app.append80FlagToLink("your value here", link);
 					    links.push(link);
 				    }

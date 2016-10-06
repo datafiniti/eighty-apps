@@ -49,12 +49,12 @@ var EightyApp = function() {
 			// console.log($(this).attr('href'));
 			var link = app.makeLink(url, $(this).attr('href'));
 
-			    if (link != null) {
+                if (link != null) {
                     var linkDomain = link.match(r);
-	                if (linkDomain && linkDomain.length > 1) {
-	                    linkDomain = linkDomain[1];
-				    if (urlDomain == linkDomain)
-				        links.push(link);
+                    if (linkDomain && linkDomain.length > 1) {
+                        linkDomain = linkDomain[1];
+                    if (urlDomain.toLowerCase() == linkDomain.toLowerCase())
+                        links.push(link);
 	               }
 			    }
 		});

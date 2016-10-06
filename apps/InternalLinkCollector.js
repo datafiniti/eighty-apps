@@ -14,14 +14,14 @@ var EightyApp = function() {
                 $html.find('a').each(function(i, obj) {
                     if ($(this).attr('href')) {
                         var link = app.makeLink(url, $(this).attr('href'));
-			            if (link != null) {
-                            var linkDomain = link.match(r);
-	                        if (linkDomain && linkDomain.length > 1) {
-	                            linkDomain = linkDomain[1];
-				                if (urlDomain == linkDomain)
-				                    links.push(link);
-	                       }
-			            }
+			        if (link != null) {
+                        var linkDomain = link.match(r);
+                        if (linkDomain && linkDomain.length > 1) {
+                            linkDomain = linkDomain[1];
+                            if (urlDomain.toLowerCase() == linkDomain.toLowerCase())
+				                links.push(link);
+	                    }
+			        }
 			        }
                 });
 
@@ -46,10 +46,10 @@ var EightyApp = function() {
 
 			    if (link != null) {
                     var linkDomain = link.match(r);
-	                if (linkDomain && linkDomain.length > 1) {
-	                    linkDomain = linkDomain[1];
-				    if (urlDomain == linkDomain)
-				        links.push(link);
+                    if (linkDomain && linkDomain.length > 1) {
+                        linkDomain = linkDomain[1];
+                    if (urlDomain.toLowerCase() == linkDomain.toLowerCase())
+                        links.push(link);
 	               }
 			    }
 		    });
