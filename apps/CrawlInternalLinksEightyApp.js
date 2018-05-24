@@ -8,33 +8,33 @@ const EightyApp = require('eighty-app');
 const app = new EightyApp();
 
 app.processDocument = function (html, url, headers, status, $) {
-	return { html };
+    return { html };
 }
 
 app.parseLinks = function (html, url, headers, status, $) {
-	const $html = this.parseHtml(html, $);
-	const links = [];
+    const $html = this.parseHtml(html, $);
+    const links = [];
 
-	const r = /:\/\/(.[^/]+)/;
-	const urlDomain = url.match(r)[1];
-	const normalizedUrlDomain = urlDomain.toLowerCase();
+    const r = /:\/\/(.[^/]+)/;
+    const urlDomain = url.match(r)[1];
+    const normalizedUrlDomain = urlDomain.toLowerCase();
 
-	// gets all links in the html document
-	$html.find('a').each(function (i, obj) {
-		const link = app.makeLink(url, $(this).attr('href'));
+    // gets all links in the html document
+    $html.find('a').each(function (i, obj) {
+        const link = app.makeLink(url, $(this).attr('href'));
 
-		if (link) {
-			const linkDomain = link.match(r)[1];
+        if (link) {
+            const linkDomain = link.match(r)[1];
 
-			if (linkDomain.toLowerCase() === normalizedUrlDomain) {
-				links.push(link);
-			}
-		}
-	});
+            if (linkDomain.toLowerCase() === normalizedUrlDomain) {
+                links.push(link);
+            }
+        }
+    });
 
-	return links;
+    return links;
 }
 
 module.exports = function () {
-	return app;
+    return app;
 }
