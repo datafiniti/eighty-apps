@@ -4,48 +4,37 @@
  **************************************************************************
  */
 
-var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status, jQuery) {
-		return html;
-	}
+const EightyApp = require('eighty-app');
+const app = new EightyApp();
 
-	this.parseLinks = function(html, url, headers, status, jQuery) {
-		var app = this;
-		var $ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var links = [];
-
-		var r = /:\/\/(.[^/]+)/;
-		var urlDomain = url.match(r)[1]
-
-		// gets all links in the html document
-		$html.find('a').each(function(i, obj) {
-			var link = app.makeLink(url, $(this).attr('href'));
-
-			if(link != null) {
-				try {
-		                        var linkDomain = link.match(r)[1];
-					if (urlDomain.toLowerCase() == linkDomain.toLowerCase()) {
-						links.push(link);
-					}
-				} catch (err) {
-					
-				}
-			}
-		});
-
-		return links;
-	}
+app.processDocument = function (html, url, headers, status, $) {
+    return { html };
 }
 
-try {
-	// Testing
-	module.exports = function(EightyAppBase) {
-		EightyApp.prototype = new EightyAppBase();
-		return new EightyApp();
-	}
-} catch(e) {
-	// Production
-	console.log("Eighty app exists.");
-	EightyApp.prototype = new EightyAppBase();
+app.parseLinks = function (html, url, headers, status, $) {
+    const $html = this.parseHtml(html, $);
+    const links = [];
+
+    const r = /:\/\/(.[^/]+)/;
+    const urlDomain = url.match(r)[1];
+    const normalizedUrlDomain = urlDomain.toLowerCase();
+
+    // gets all links in the html document
+    $html.find('a').each(function (i, obj) {
+        const link = app.makeLink(url, $(this).attr('href'));
+
+        if (link) {
+            const linkDomain = link.match(r)[1];
+
+            if (linkDomain.toLowerCase() === normalizedUrlDomain) {
+                links.push(link);
+            }
+        }
+    });
+
+    return links;
+}
+
+module.exports = function () {
+    return app;
 }

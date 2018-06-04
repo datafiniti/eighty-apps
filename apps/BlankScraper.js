@@ -1,36 +1,20 @@
-var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status, jQuery) {
+const EightyApp = require('eighty-app');
+const app = new EightyApp();
 
-		// First we construct an HTML object so we can use Jquery
-		var app = this;
-		$ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var object = {};
-		
-		// Finally, we return the object as a string
-		return JSON.stringify(object);
-	}
+app.processDocument = function(html, url, headers, status, $) {
+	const $html = this.parseHtml(html, $);
+	const data = {};
 
-	this.parseLinks = function(html, url, headers, status, jQuery) {
-
-		// We construct the HTML object for Jquery again
-		var app = this;
-		var $ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var links = [];
-
-		return links;
-	}
+	return data;
 }
 
-try {
-	// Testing
-	module.exports = function(EightyAppBase) {
-		EightyApp.prototype = new EightyAppBase();
-		return new EightyApp();
-	}
-} catch(e) {
-	// Production
-	console.log("Eighty app exists.");
-	EightyApp.prototype = new EightyAppBase();
+app.parseLinks = function (html, url, headers, status, $) {
+	const $html = this.parseHtml(html, $);
+	const links = [];
+
+	return links;
+}
+
+module.exports = function () {
+	return app;
 }

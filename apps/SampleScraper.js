@@ -9,7 +9,7 @@ var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
 
 		// We only want to collect data from listing pages
-		if (url.match("/pro/") {
+		if (url.match("/pro/")) {
 
 			// First we construct an HTML object so we can use Jquery
 			var app = this;
@@ -58,14 +58,7 @@ var EightyApp = function() {
 	}
 }
 
-try {
-	// Testing
-	module.exports = function(EightyAppBase) {
-		EightyApp.prototype = new EightyAppBase();
-		return new EightyApp();
-	}
-} catch(e) {
-	// Production
-	console.log("Eighty app exists.");
+module.exports = function (EightyAppBase) {
 	EightyApp.prototype = new EightyAppBase();
-}
+	return new EightyApp();
+};
