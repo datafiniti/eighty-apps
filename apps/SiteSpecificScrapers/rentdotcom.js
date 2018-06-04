@@ -149,14 +149,7 @@ var EightyApp = function() {
 	};
 };
 
-try {
-  // Testing
-  module.exports = function(EightyAppBase) {
-    EightyApp.prototype = new EightyAppBase();
-    return new EightyApp();
-  };
-} catch (e) {
-  // Production
-  console.log("Eighty app exists.");
-  EightyApp.prototype = new EightyAppBase();
+module.exports = function (EightyAppBase) {
+	EightyApp.prototype = new EightyAppBase();
+	return new EightyApp();
 }

@@ -56,6 +56,6 @@ var EightyApp = function() {
 
 
 module.exports = function(EightyAppBase) {
-        EightyApp.prototype = new EightyAppBase();
-        return new EightyApp();
+    EightyApp.prototype = new EightyAppBase();
+    return new EightyApp();
 }
