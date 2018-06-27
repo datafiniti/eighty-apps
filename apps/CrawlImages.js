@@ -7,7 +7,10 @@
  *  - type: the true type of the image i.e. jpg, png etc. This goes off the metadata of the
  *          image itself as opposed to the extension in the url
  * 
- * Note: This 80app will ONLY work against urls that have ?80flag=type:image tacked onto the
+ * If the content of the url cannot be identified as an image, the 80app will return an
+ * empty object.
+ *
+ *  Note: This 80app will ONLY work against urls that have ?80flag=type:image tacked onto the
  *       end of the url
  */
 
