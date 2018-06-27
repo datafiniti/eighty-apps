@@ -12,6 +12,20 @@
  *
  *  Note: This 80app will ONLY work against urls that have ?80flag=type:image tacked onto the
  *       end of the url
+ * 
+ * Supported image formats:
+ *  - bmp
+ *  - cur
+ *  - dds
+ *  - gif
+ *  - icns
+ *  - ico
+ *  - jpg
+ *  - png
+ *  - psd
+ *  - svg
+ *  - tiff
+ *  - webp
  */
 
 const EightyApp = require('eighty-app');
