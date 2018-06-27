@@ -2,8 +2,8 @@
  * This 80app can be used to crawl images. The following properties of an image will be returned:
  *  - base64: the image encoded using base64
  *  - byteSize: the size of the image
- *  - width: the width of the image
- *  - height: the height of the image
+ *  - width: the width of the image in pixels
+ *  - height: the height of the image in pixels
  *  - type: the true type of the image i.e. jpg, png etc. This goes off the metadata of the
  *          image itself as opposed to the extension in the url
  * 
