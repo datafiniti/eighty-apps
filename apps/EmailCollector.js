@@ -10,7 +10,7 @@ var EightyApp = function() {
 		// Get emails
 		var emailList = [];
 		emailList = html.match(/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9]+)*(\.[a-z]{2,})/gi);
-		object.emailList = emailList;
+		object.emailList = emailList.slice(1,emailList.length);
 
 		return JSON.stringify(object);
 	}
