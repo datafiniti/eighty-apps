@@ -2,7 +2,7 @@
 
 var EightyApp = function() {
 	this.processDocument = function(html, url, headers, status, jQuery) {
-		return html;
+		return { html };
 	}
 
 	this.parseLinks = function(html, url, headers, status, jQuery) {
