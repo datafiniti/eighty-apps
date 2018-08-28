@@ -4,14 +4,16 @@ const app = new EightyApp();
 
 const EMAIL_REGEX = /([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})/ig;
 
-app.processDocument = function(html) {
+app.processDocument = function(html, url, headers, status, cheerio, extras) {
     let data = {};
+    const { isEmail } = extras.validator;
 
     // Get emails
-    const emailList = html.match(EMAIL_REGEX);
+    const emails = html.match(EMAIL_REGEX);
 
-    if (emailList) {
-        data.emails = emailList;
+    if (emails) {
+
+        data.emails = emails.filter(email => isEmail(email));
     }
 
     // It's possible that one page could contain the same email address multiple times, so we deduplify them.
