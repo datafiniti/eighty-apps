@@ -4,40 +4,18 @@ EightyApps
 ###Basic 80app format
 
 ```javascript
-var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status, jQuery) {
-		var app = this;
-		$ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var object = new Object();
-
-		// populate the object
-
-		return JSON.stringify(object);
-	}
-
-	this.parseLinks = function(html, url, headers, status, jQuery) {
-		var app = this;
-		$ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var links = [];
-
-		// get all the links
-
-		return links;
-	}
+onst EightyApp = require('eighty-app');
+const app = new EightyApp();
+app.processDocument = function(html, url, headers, status, cheerio, extras) {
+    const data = {};
+    return JSON.stringify(data);
+};
+app.parseLinks = function(html, url, headers, status, cheerio, extras) {
+    return [];
 }
-
-try {
-	// Testing
-	module.exports = function(EightyAppBase) {
-		EightyApp.prototype = new EightyAppBase();
-		return new EightyApp();
-	}
-} catch(e) {
-	// Production
-	EightyApp.prototype = new EightyAppBase();
-}
+module.exports = function() { 
+    return app;
+};
 ```
 
 ### Testing
