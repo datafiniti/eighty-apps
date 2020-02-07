@@ -1,29 +1,25 @@
-// This 80app returns the full HTML of each URL crawled
+const EightyApp = require('eighty-app');
+const app = new EightyApp();
 
-var EightyApp = function() {
-	this.processDocument = function(html, url, headers, status, jQuery) {
-		return { html };
-	}
+app.processDocument = function(html, url, headers, status, cheerio, extras) {
+    return { html }
+};
+app.parseLinks = function(html, url, headers, status, cheerio, extras) {
+	const $ = cheerio;
+	const $html = app.parseHtml(html, $);
+	const links = [];
 
-	this.parseLinks = function(html, url, headers, status, jQuery) {
-		var app = this;
-		var $ = jQuery;
-		var $html = app.parseHtml(html, $);
-		var links = [];
+	// gets all links in the html document
+	$html.find('a').each(function(i, obj) {
+		const link = app.makeLink(url, $(this).attr('href'));
+		if(link != null) {
+			links.push(link);
+		}
+	});
 
-		// gets all links in the html document
-		$html.find('a').each(function(i, obj) {
-			var link = app.makeLink(url, $(this).attr('href'));
-			if(link != null) {
-				links.push(link);
-			}
-		});
-
-		return links;
-	}
+	return links;
 }
 
-module.exports = function (EightyAppBase) {
-	EightyApp.prototype = new EightyAppBase();
-	return new EightyApp();
-}
+module.exports = function() { 
+    return app;
+};
