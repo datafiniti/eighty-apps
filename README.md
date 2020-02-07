@@ -6,6 +6,7 @@ EightyApps
 ```javascript
 onst EightyApp = require('eighty-app');
 const app = new EightyApp();
+
 app.processDocument = function(html, url, headers, status, cheerio, extras) {
     const data = {};
     return JSON.stringify(data);
